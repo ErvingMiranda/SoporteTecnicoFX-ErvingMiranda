@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane prefHeight="650.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.ezone.pae.soportetecnicofx.Controllers.SolicitudServiciosController">
+
+    <children>
+
+        <Label layoutX="246.0" layoutY="14.0" text="Solicitud de servicio">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <Separator layoutX="20.0" layoutY="47.0" prefWidth="660.0" />
+
+        <Label layoutX="20.0" layoutY="65.0" text="Cliente" />
+        <TextField fx:id="txtCliente" layoutX="20.0" layoutY="85.0" prefWidth="320.0" promptText="Nombre del cliente" />
+
+        <Label layoutX="360.0" layoutY="65.0" text="Correo del cliente" />
+        <TextField fx:id="txtCorreoCliente" layoutX="360.0" layoutY="85.0" prefWidth="320.0" promptText="Correo del cliente" />
+
+        <Label layoutX="20.0" layoutY="125.0" text="Tipo de cliente" />
+        <ComboBox fx:id="cmbTipoCliente" layoutX="20.0" layoutY="145.0" prefWidth="320.0" promptText="Seleccione un tipo" />
+
+        <Label layoutX="360.0" layoutY="125.0" text="Asunto" />
+        <TextField fx:id="txtAsunto" layoutX="360.0" layoutY="145.0" prefWidth="320.0" promptText="Asunto de la solicitud" />
+
+        <Label layoutX="20.0" layoutY="185.0" text="Tipo de servicio" />
+        <ComboBox fx:id="cmbTipoServicio" layoutX="20.0" layoutY="205.0" prefWidth="320.0" promptText="Seleccione un servicio" />
+
+        <Label layoutX="360.0" layoutY="185.0" text="Prioridad" />
+        <RadioButton fx:id="rbtnPrioridadBaja" layoutX="360.0" layoutY="208.0" mnemonicParsing="false" text="Baja" />
+        <RadioButton fx:id="rbtnPrioridadMedia" layoutX="430.0" layoutY="208.0" mnemonicParsing="false" text="Media" />
+        <RadioButton fx:id="rbtnPrioridadAlta" layoutX="510.0" layoutY="208.0" mnemonicParsing="false" text="Alta" />
+
+        <Label layoutX="20.0" layoutY="250.0" text="Descripción del problema" />
+        <TextArea fx:id="txtAreaDescripcionProblema" layoutX="20.0" layoutY="270.0" prefHeight="100.0" prefWidth="660.0" promptText="Describa el problema" wrapText="true" />
+
+        <Label layoutX="20.0" layoutY="390.0" text="Archivo adjunto" />
+        <TextField fx:id="txtArchivoAdjunto" editable="false" layoutX="20.0" layoutY="410.0" prefWidth="535.0" promptText="Seleccione un archivo" />
+        <Button fx:id="btnSeleccionarArchivo" layoutX="570.0" layoutY="410.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar" />
+
+        <Label layoutX="20.0" layoutY="450.0" text="Carpeta de evidencias" />
+        <TextField fx:id="txtCarpetaEvidencias" editable="false" layoutX="20.0" layoutY="470.0" prefWidth="535.0" promptText="Seleccione un directorio" />
+        <Button fx:id="btnSeleccionarDirectorio" layoutX="570.0" layoutY="470.0" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Seleccionar" />
+
+        <Separator layoutX="20.0" layoutY="525.0" prefWidth="660.0" />
+
+        <Button fx:id="btnGuardarSolicitud" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#guardarSolicitud" style="-fx-background-color: #A9D0F5;" text="Guardar" />
+        <Button fx:id="btnCrearSolicitud" layoutX="105.0" layoutY="555.0" mnemonicParsing="false" onAction="#crearSolicitud" style="-fx-background-color: #B7E4C7;" text="Crear solicitud" />
+        <Button fx:id="btnLimpiar" layoutX="225.0" layoutY="555.0" mnemonicParsing="false" onAction="#limpiarContenido" text="Limpiar" />
+        <Button fx:id="btnCerrar" layoutX="300.0" layoutY="555.0" mnemonicParsing="false" onAction="#cerrar" style="-fx-background-color: #F3B0B0;" text="Cerrar" />
+
+    </children>
 
 </AnchorPane>

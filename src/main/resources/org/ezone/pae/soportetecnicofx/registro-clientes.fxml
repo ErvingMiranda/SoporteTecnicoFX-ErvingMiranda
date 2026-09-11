@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane prefHeight="500.0" prefWidth="650.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.ezone.pae.soportetecnicofx.Controllers.RegistroClientesController">
+
+    <children>
+
+        <Label layoutX="235.0" layoutY="14.0" text="Registro de clientes">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <Separator layoutX="20.0" layoutY="47.0" prefWidth="610.0" />
+
+        <Label layoutX="20.0" layoutY="65.0" text="Nombre" />
+        <TextField fx:id="txtNombreCliente" layoutX="20.0" layoutY="85.0" prefWidth="610.0" promptText="Nombre del cliente" />
+
+        <Label layoutX="20.0" layoutY="125.0" text="Correo" />
+        <TextField fx:id="txtCorreoCliente" layoutX="20.0" layoutY="145.0" prefWidth="290.0" promptText="Correo del cliente" />
+
+        <Label layoutX="340.0" layoutY="125.0" text="Teléfono" />
+        <TextField fx:id="txtTelefonoCliente" layoutX="340.0" layoutY="145.0" prefWidth="290.0" promptText="Teléfono del cliente" />
+
+        <Label layoutX="20.0" layoutY="185.0" text="Tipo de cliente" />
+        <ComboBox fx:id="cmbTipoCliente" layoutX="20.0" layoutY="205.0" prefWidth="290.0" promptText="Seleccione un tipo" />
+
+        <Label layoutX="20.0" layoutY="245.0" text="Documento de identificación" />
+        <TextField fx:id="txtDocumentoIdentificacion" editable="false" layoutX="20.0" layoutY="265.0" prefWidth="490.0" promptText="Seleccione un archivo" />
+        <Button fx:id="btnSeleccionarDocumento" layoutX="525.0" layoutY="265.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar" />
+
+        <Label layoutX="20.0" layoutY="305.0" text="Directorio del cliente" />
+        <TextField fx:id="txtDirectorioCliente" editable="false" layoutX="20.0" layoutY="325.0" prefWidth="490.0" promptText="Seleccione un directorio" />
+        <Button fx:id="btnSeleccionarDirectorio" layoutX="525.0" layoutY="325.0" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Seleccionar" />
+
+        <Separator layoutX="20.0" layoutY="375.0" prefWidth="610.0" />
+
+        <Button fx:id="btnGuardarCliente" layoutX="20.0" layoutY="405.0" mnemonicParsing="false" onAction="#guardarCliente" style="-fx-background-color: #A9D0F5;" text="Guardar" />
+        <Button fx:id="btnCrearSolicitud" layoutX="105.0" layoutY="405.0" mnemonicParsing="false" onAction="#crearSolicitud" style="-fx-background-color: #B7E4C7;" text="Crear solicitud" />
+        <Button fx:id="btnLimpiar" layoutX="225.0" layoutY="405.0" mnemonicParsing="false" onAction="#limpiarContenido" text="Limpiar" />
+        <Button fx:id="btnCerrar" layoutX="300.0" layoutY="405.0" mnemonicParsing="false" onAction="#cerrar" style="-fx-background-color: #F3B0B0;" text="Cerrar" />
+
+    </children>
 
 </AnchorPane>
