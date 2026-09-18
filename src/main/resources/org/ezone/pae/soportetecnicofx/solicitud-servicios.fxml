@@ -4,58 +4,158 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="700.0"
+<AnchorPane prefHeight="980.0" prefWidth="700.0"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.ezone.pae.soportetecnicofx.Controllers.SolicitudServiciosController">
 
     <children>
 
-        <Label layoutX="246.0" layoutY="14.0" text="Solicitud de servicio">
+        <Label layoutX="20.0" layoutY="20.0" text="Solicitud de Servicio">
             <font>
-                <Font name="System Bold" size="20.0" />
+                <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
 
-        <Separator layoutX="20.0" layoutY="47.0" prefWidth="660.0" />
+        <Separator layoutX="20.0" layoutY="55.0" prefWidth="660.0"/>
 
-        <Label layoutX="20.0" layoutY="65.0" text="Cliente" />
-        <TextField fx:id="txtCliente" layoutX="20.0" layoutY="85.0" prefWidth="320.0" promptText="Nombre del cliente" />
+        <Label layoutX="20.0" layoutY="70.0" text="Datos del cliente">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
 
-        <Label layoutX="360.0" layoutY="65.0" text="Correo del cliente" />
-        <TextField fx:id="txtCorreoCliente" layoutX="360.0" layoutY="85.0" prefWidth="320.0" promptText="Correo del cliente" />
+        <Label layoutX="20.0" layoutY="105.0" text="Cliente"/>
+        <TextField fx:id="txtCliente"
+                   editable="false"
+                   layoutX="20.0"
+                   layoutY="125.0"
+                   prefWidth="660.0"
+                   promptText="Cliente no asociado"/>
 
-        <Label layoutX="20.0" layoutY="125.0" text="Tipo de cliente" />
-        <ComboBox fx:id="cmbTipoCliente" layoutX="20.0" layoutY="145.0" prefWidth="320.0" promptText="Seleccione un tipo" />
+        <Label layoutX="20.0" layoutY="165.0" text="Correo"/>
+        <TextField fx:id="txtCorreoCliente"
+                   editable="false"
+                   layoutX="20.0"
+                   layoutY="185.0"
+                   prefWidth="660.0"
+                   promptText="Correo del cliente"/>
 
-        <Label layoutX="360.0" layoutY="125.0" text="Asunto" />
-        <TextField fx:id="txtAsunto" layoutX="360.0" layoutY="145.0" prefWidth="320.0" promptText="Asunto de la solicitud" />
+        <Label layoutX="20.0" layoutY="225.0" text="Tipo de cliente"/>
+        <TextField fx:id="txtTipoCliente"
+                   editable="false"
+                   layoutX="20.0"
+                   layoutY="245.0"
+                   prefWidth="660.0"
+                   promptText="Tipo de cliente"/>
 
-        <Label layoutX="20.0" layoutY="185.0" text="Tipo de servicio" />
-        <ComboBox fx:id="cmbTipoServicio" layoutX="20.0" layoutY="205.0" prefWidth="320.0" promptText="Seleccione un servicio" />
+        <Separator layoutX="20.0" layoutY="290.0" prefWidth="660.0"/>
 
-        <Label layoutX="360.0" layoutY="185.0" text="Prioridad" />
-        <RadioButton fx:id="rbtnPrioridadBaja" layoutX="360.0" layoutY="208.0" mnemonicParsing="false" text="Baja" />
-        <RadioButton fx:id="rbtnPrioridadMedia" layoutX="430.0" layoutY="208.0" mnemonicParsing="false" text="Media" />
-        <RadioButton fx:id="rbtnPrioridadAlta" layoutX="510.0" layoutY="208.0" mnemonicParsing="false" text="Alta" />
+        <Label layoutX="20.0" layoutY="305.0" text="Datos de la solicitud">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
 
-        <Label layoutX="20.0" layoutY="250.0" text="Descripción del problema" />
-        <TextArea fx:id="txtAreaDescripcionProblema" layoutX="20.0" layoutY="270.0" prefHeight="100.0" prefWidth="660.0" promptText="Describa el problema" wrapText="true" />
+        <Label layoutX="20.0" layoutY="340.0" text="Asunto"/>
+        <TextField fx:id="txtAsunto"
+                   layoutX="20.0"
+                   layoutY="360.0"
+                   prefWidth="660.0"
+                   promptText="Digite el asunto de la solicitud"/>
 
-        <Label layoutX="20.0" layoutY="390.0" text="Archivo adjunto" />
-        <TextField fx:id="txtArchivoAdjunto" editable="false" layoutX="20.0" layoutY="410.0" prefWidth="535.0" promptText="Seleccione un archivo" />
-        <Button fx:id="btnSeleccionarArchivo" layoutX="570.0" layoutY="410.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar" />
+        <Label layoutX="20.0" layoutY="400.0" text="Tipo de servicio"/>
+        <ComboBox fx:id="cmbTipoServicio"
+                  layoutX="20.0"
+                  layoutY="420.0"
+                  prefWidth="660.0"
+                  promptText="Seleccione el tipo de servicio"/>
 
-        <Label layoutX="20.0" layoutY="450.0" text="Carpeta de evidencias" />
-        <TextField fx:id="txtCarpetaEvidencias" editable="false" layoutX="20.0" layoutY="470.0" prefWidth="535.0" promptText="Seleccione un directorio" />
-        <Button fx:id="btnSeleccionarDirectorio" layoutX="570.0" layoutY="470.0" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Seleccionar" />
+        <Label layoutX="20.0" layoutY="460.0" text="Prioridad"/>
+        <ComboBox fx:id="cmbPrioridad"
+                  layoutX="20.0"
+                  layoutY="480.0"
+                  prefWidth="660.0"
+                  promptText="Seleccione la prioridad"/>
 
-        <Separator layoutX="20.0" layoutY="525.0" prefWidth="660.0" />
+        <Label layoutX="20.0" layoutY="520.0" text="Descripción del problema"/>
+        <TextArea fx:id="txtAreaDescripcionProblema"
+                  layoutX="20.0"
+                  layoutY="540.0"
+                  prefHeight="90.0"
+                  prefWidth="660.0"
+                  promptText="Describa el problema o solicitud"
+                  wrapText="true"/>
 
-        <Button fx:id="btnGuardarSolicitud" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#guardarSolicitud" style="-fx-background-color: #A9D0F5;" text="Guardar" />
-        <Button fx:id="btnCrearSolicitud" layoutX="105.0" layoutY="555.0" mnemonicParsing="false" onAction="#crearSolicitud" style="-fx-background-color: #B7E4C7;" text="Crear solicitud" />
-        <Button fx:id="btnLimpiar" layoutX="225.0" layoutY="555.0" mnemonicParsing="false" onAction="#limpiarContenido" text="Limpiar" />
-        <Button fx:id="btnCerrar" layoutX="300.0" layoutY="555.0" mnemonicParsing="false" onAction="#cerrar" style="-fx-background-color: #F3B0B0;" text="Cerrar" />
+        <Label layoutX="20.0" layoutY="650.0" text="Archivo adjunto"/>
+        <TextField fx:id="txtArchivoAdjunto"
+                   editable="false"
+                   layoutX="20.0"
+                   layoutY="670.0"
+                   prefWidth="520.0"
+                   promptText="No se ha seleccionado un archivo"/>
+
+        <Button fx:id="btnSeleccionarArchivo"
+                layoutX="550.0"
+                layoutY="670.0"
+                mnemonicParsing="false"
+                onAction="#seleccionarArchivo"
+                text="Seleccionar archivo"/>
+
+        <Label layoutX="20.0" layoutY="710.0" text="Carpeta"/>
+        <TextField fx:id="txtCarpetaEvidencias"
+                   editable="false"
+                   layoutX="20.0"
+                   layoutY="730.0"
+                   prefWidth="520.0"
+                   promptText="No se ha seleccionado una carpeta"/>
+
+        <Button fx:id="btnSeleccionarDirectorio"
+                layoutX="550.0"
+                layoutY="730.0"
+                mnemonicParsing="false"
+                onAction="#seleccionarDirectorio"
+                text="Seleccionar carpeta"/>
+
+        <Separator layoutX="20.0" layoutY="780.0" prefWidth="660.0"/>
+
+        <Button fx:id="btnGuardarSolicitud"
+                layoutX="20.0"
+                layoutY="800.0"
+                mnemonicParsing="false"
+                onAction="#guardarSolicitud"
+                style="-fx-background-color: #A9D0F5;"
+                text="Guardar"/>
+
+        <Button fx:id="btnLimpiar"
+                layoutX="105.0"
+                layoutY="800.0"
+                mnemonicParsing="false"
+                onAction="#limpiarContenido"
+                text="Limpiar"/>
+
+        <Button fx:id="btnCerrar"
+                layoutX="180.0"
+                layoutY="800.0"
+                mnemonicParsing="false"
+                onAction="#cerrar"
+                style="-fx-background-color: #F3B0B0;"
+                text="Cerrar"/>
+
+        <Label layoutX="20.0" layoutY="850.0" text="Resultado">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+
+        <TextArea fx:id="txtAreaResultado"
+                  editable="false"
+                  layoutX="20.0"
+                  layoutY="875.0"
+                  prefHeight="80.0"
+                  prefWidth="660.0"
+                  promptText="Aquí se mostrará el resultado"
+                  wrapText="true"/>
 
     </children>
 

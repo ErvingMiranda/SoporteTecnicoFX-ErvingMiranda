@@ -1,20 +1,18 @@
 package org.ezone.pae.soportetecnicofx.Controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.ezone.pae.soportetecnicofx.Models.Cliente;
 
 import java.io.File;
-import java.util.Optional;
 
 public class SolicitudServiciosController {
 
@@ -25,7 +23,7 @@ public class SolicitudServiciosController {
     private TextField txtCorreoCliente;
 
     @FXML
-    private ComboBox<String> cmbTipoCliente;
+    private TextField txtTipoCliente;
 
     @FXML
     private TextField txtAsunto;
@@ -34,13 +32,7 @@ public class SolicitudServiciosController {
     private ComboBox<String> cmbTipoServicio;
 
     @FXML
-    private RadioButton rbtnPrioridadBaja;
-
-    @FXML
-    private RadioButton rbtnPrioridadMedia;
-
-    @FXML
-    private RadioButton rbtnPrioridadAlta;
+    private ComboBox<String> cmbPrioridad;
 
     @FXML
     private TextArea txtAreaDescripcionProblema;
@@ -52,13 +44,7 @@ public class SolicitudServiciosController {
     private TextField txtCarpetaEvidencias;
 
     @FXML
-    private Button btnGuardarSolicitud;
-
-    @FXML
-    private Button btnCrearSolicitud;
-
-    @FXML
-    private Button btnLimpiar;
+    private TextArea txtAreaResultado;
 
     @FXML
     private Button btnSeleccionarArchivo;
@@ -69,16 +55,33 @@ public class SolicitudServiciosController {
     @FXML
     private Button btnCerrar;
 
-    private final ToggleGroup tgPrioridad = new ToggleGroup();
+    private Cliente cliente;
 
     @FXML
     private void initialize() {
-        cmbTipoCliente.getItems().addAll("Particular", "Empresa");
-        cmbTipoServicio.getItems().addAll("Hardware", "Software", "Redes", "Mantenimiento");
+        cmbTipoServicio.setItems(FXCollections.observableArrayList(
+                "Hardware",
+                "Software",
+                "Redes",
+                "Mantenimiento"
+        ));
 
-        rbtnPrioridadBaja.setToggleGroup(tgPrioridad);
-        rbtnPrioridadMedia.setToggleGroup(tgPrioridad);
-        rbtnPrioridadAlta.setToggleGroup(tgPrioridad);
+        cmbPrioridad.getItems().addAll(
+                "Baja",
+                "Media",
+                "Alta"
+        );
+    }
+
+    public void recibirCliente(Cliente cliente) {
+        if (cliente == null) {
+            return;
+        }
+
+        this.cliente = cliente;
+        txtCliente.setText(cliente.getNombre());
+        txtCorreoCliente.setText(cliente.getCorreo());
+        txtTipoCliente.setText(cliente.getTipoCliente());
     }
 
     @FXML
@@ -104,7 +107,7 @@ public class SolicitudServiciosController {
     @FXML
     private void seleccionarDirectorio() {
         DirectoryChooser dc = new DirectoryChooser();
-        dc.setTitle("Seleccionar carpeta de evidencias");
+        dc.setTitle("Seleccionar carpeta");
         dc.setInitialDirectory(new File("C:\\"));
 
         File f = dc.showDialog(btnSeleccionarDirectorio.getScene().getWindow());
@@ -120,32 +123,41 @@ public class SolicitudServiciosController {
             return;
         }
 
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmación");
-        confirmacion.setHeaderText("¿Seguro que desea guardar la solicitud?");
-        confirmacion.setContentText("Asunto: " + txtAsunto.getText());
+        String informacionCliente;
 
-        Optional<ButtonType> respuesta = confirmacion.showAndWait();
-
-        if (respuesta.isPresent() && respuesta.get() == ButtonType.OK) {
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("Solicitud guardada");
-            alerta.setHeaderText("Solicitud guardada");
-            alerta.setContentText("Solicitud guardada correctamente.");
-            alerta.showAndWait();
-
-            limpiarFormulario();
+        if (cliente != null) {
+            informacionCliente = "Datos del cliente:\n";
+            informacionCliente += "Cliente: " + cliente.getNombre() + "\n";
+            informacionCliente += "Correo: " + cliente.getCorreo() + "\n";
+            informacionCliente += "Tipo de cliente: " + cliente.getTipoCliente() + "\n";
         }
-    }
+        else {
+            informacionCliente= "Datos del cliente:\n" + "Solicitud sin cliente";
+        }
 
-    @FXML
-    private void crearSolicitud() {
+        String resultado = informacionCliente + "\n\n" + "Solicitud de servicio\n" +
+                "Asunto: " + txtAsunto.getText() + "\n" +
+                "Tipo de servicio: " + cmbTipoServicio.getValue() + "\n" +
+                "Prioridad: " + cmbPrioridad.getValue() + "\n" +
+                "Descripción del problema: " + txtAreaDescripcionProblema.getText() + "\n" +
+                "Archivo adjunto: " + txtArchivoAdjunto.getText() + "\n" +
+                "Carpeta evidencias: " + txtCarpetaEvidencias.getText();
 
+        txtAreaResultado.setText(resultado);
+
+        mostrarAlerta(
+                Alert.AlertType.INFORMATION,
+                "Solicitud registrada",
+                "La solicitud fue registrada"
+        );
+
+        limpiarSolicitud();
     }
 
     @FXML
     private void limpiarContenido() {
-        limpiarFormulario();
+        limpiarSolicitud();
+        txtAreaResultado.clear();
     }
 
     @FXML
@@ -155,12 +167,18 @@ public class SolicitudServiciosController {
     }
 
     private boolean validarFormulario() {
-        if (txtCliente.getText().isEmpty() || txtCorreoCliente.getText().isEmpty() || cmbTipoCliente.getValue() == null || txtAsunto.getText().isEmpty() || cmbTipoServicio.getValue() == null || tgPrioridad.getSelectedToggle() == null || txtAreaDescripcionProblema.getText().isEmpty() || txtArchivoAdjunto.getText().isEmpty() || txtCarpetaEvidencias.getText().isEmpty()) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Advertencia");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Ningún campo debe quedar vacío.");
-            alerta.showAndWait();
+        if (txtAsunto.getText().isEmpty() ||
+                cmbTipoServicio.getValue() == null ||
+                cmbPrioridad.getValue() == null ||
+                txtAreaDescripcionProblema.getText().isEmpty() ||
+                txtArchivoAdjunto.getText().isEmpty() ||
+                txtCarpetaEvidencias.getText().isEmpty()) {
+
+            mostrarAlerta(
+                    Alert.AlertType.WARNING,
+                    "Advertencia",
+                    "Ningún campo de la solicitud debe quedar vacío."
+            );
 
             return false;
         }
@@ -168,13 +186,18 @@ public class SolicitudServiciosController {
         return true;
     }
 
-    private void limpiarFormulario() {
-        txtCliente.clear();
-        txtCorreoCliente.clear();
-        cmbTipoCliente.setValue(null);
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    private void limpiarSolicitud() {
         txtAsunto.clear();
         cmbTipoServicio.setValue(null);
-        tgPrioridad.selectToggle(null);
+        cmbPrioridad.setValue(null);
         txtAreaDescripcionProblema.clear();
         txtArchivoAdjunto.clear();
         txtCarpetaEvidencias.clear();
